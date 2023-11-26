@@ -14,3 +14,4 @@ O que foi utilizado:
 - TailwindCSS
 - PHP
 - MySQL
+- Vite
