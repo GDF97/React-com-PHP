@@ -16,13 +16,8 @@
                 $query->bindParam(":id", $id);
                 $query->bindParam(":tarefa", $tarefa);
                 $query->execute();
-                
-                $sql = 'select * from tb_tarefas';
-                $query = $pdo->prepare($sql);
-                $query->execute();
-    
-                $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                
+
+                $result = 'ok';
                 echo json_encode($result);
             } catch (PDOException $e) {
                 echo json_encode(array("error" => $e->getMessage()));

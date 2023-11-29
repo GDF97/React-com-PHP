@@ -5,8 +5,6 @@ import Todo from "./components/Todo";
 function App() {
   const [task, setTask] = useState("");
   const [listOfTasks, setListOfTasks] = useState([]);
-  const [dataFromDB, setDataFromDB] = useState([]);
-  let arr = [];
 
   const fetchData = async () => {
     const configAPI = {
@@ -19,67 +17,111 @@ function App() {
     try {
       const response = await fetch(url, configAPI);
       const data = await response.json();
-      setDataFromDB(data);
-      console.log("Data from API: ", data);
+      const arr = [];
+      data.forEach((element) => {
+        arr.push({
+          id: element.id_tarefa,
+          text: element.nm_tarefa,
+          isCompleted: element.isCompleted,
+        });
+      });
+      setListOfTasks(arr);
     } catch (error) {
       console.error(error);
     }
-
-    /*    for (let i = 0; i < dataFromDB.length; i++) {
-      arr.push({
-        id: dataFromDB[i].id_tarefa,
-        text: dataFromDB[i].nm_tarefa,
-      });
-    }
-
-    setListOfTasks([...arr]);*/
   };
 
   useEffect(() => {
     console.log("useEffect is running");
     fetchData();
-		console.time(fetchData());
   }, []);
 
-  useEffect(() => {
-    if (dataFromDB > 0) console.log("teste");
-  }, [dataFromDB]);
+  const fnAddTodo = async (tarefa) => {
+    if (!tarefa) return;
 
-  const fnAddTodo = (text) => {
-    if (!text) return;
+    const configAPI = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tarefa }),
+    };
+    const url =
+      "http://localhost/React+PHP/TodoList/back-end/php/api/InsertAPI.php";
+
+    try {
+      const response = await fetch(url, configAPI);
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
 
     setTask("");
     fetchData();
   };
 
-  const fnCompleteTodo = (id) => {
-    /*const newListOfTasks = [...listOfTasks];
-    newListOfTasks.map((task) =>
-      task.id === id ? (task.isCompleted = !task.isCompleted) : task,
-    );
-    setListOfTasks(newListOfTasks);*/
+  const fnCompleteTodo = async (id, todoStatus) => {
+    let isCompleted = !todoStatus;
+
+    const configAPI = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, isCompleted }),
+    };
+    const url =
+      "http://localhost/React+PHP/TodoList/back-end/php/api/CompleteAPI.php";
+
+    try {
+      const response = await fetch(url, configAPI);
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
 
     fetchData();
   };
 
-  const fnEditTodo = (id) => {
-    /*const newListOfTasks = [...listOfTasks];
-    let newTask = prompt("Escreva o nome de uma nova task");
-    if (!newTask) return;
-    newListOfTasks.map((task) =>
-      task.id === id ? (task.text = newTask) : task,
-    );
+  const fnEditTodo = async (id) => {
+    let tarefa = prompt("Atualize o nome da tarefa");
+    if (!tarefa) return;
 
-    setListOfTasks(newListOfTasks);*/
+    const configAPI = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, tarefa }),
+    };
+
+    const url =
+      "http://localhost/React+PHP/TodoList/back-end/php/api/UpdateAPI.php";
+
+    try {
+      const response = await fetch(url, configAPI);
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
 
     fetchData();
   };
 
-  const fnDeleteTodo = (id) => {
-    /*    const newListOfTasks = listOfTasks.filter((task) =>
-      task.id !== id ? task : null,
-    );
-    setListOfTasks(newListOfTasks);*/
+  const fnDeleteTodo = async (id) => {
+    const configAPI = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    };
+    const url =
+      "http://localhost/React+PHP/TodoList/back-end/php/api/DeleteAPI.php";
+
+    try {
+      const response = await fetch(url, configAPI);
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+
     fetchData();
   };
 

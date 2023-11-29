@@ -6,22 +6,23 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data = json_decode(file_get_contents('php://input'), true);     
 
-        if(isset($data['tarefa'])){
-            $tarefa = $data['tarefa'];
+        if(isset($data['id']) && isset($data['isCompleted'])){
+            $id = $data['id'];
+            $isCompleted = $data['isCompleted'];
 
             try {
-                $sql = 'insert into tb_tarefas(nm_tarefa, isCompleted) values(:tarefa, false)';
+                $sql = 'update tb_tarefas set isCompleted = :isCompleted where id_tarefa = :id';
                 $query = $pdo->prepare($sql);
-                $query->bindParam(":tarefa", $tarefa);
+                $query->bindParam(":id", $id);
+                $query->bindParam(":isCompleted", $isCompleted);
                 $query->execute();
 
-                $result = "ok";
-
-                echo json_encode(array("status" => $result));
+                $result = 'ok';
+                echo json_encode($result);
             } catch (PDOException $e) {
                 echo json_encode(array("error" => $e->getMessage()));
             }
         }
+        
     }
-
 ?>

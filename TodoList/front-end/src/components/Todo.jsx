@@ -1,22 +1,27 @@
 const Todo = ({ task, isCompleted, id, fnComplete, fnEdit, fnDelete }) => {
-  if (isCompleted) console.log("completou", task);
+  let classeTarefa = isCompleted ? "line-through" : "";
+  let classeDiv =
+    "w-full border border-black flex px-6 py-2 items-center justify-between";
 
-  let classe = isCompleted ? "line-through" : "";
+  if (isCompleted) {
+    classeDiv += " bg-green-500";
+  } else {
+    classeDiv =
+      "w-full border border-black flex px-6 py-2 items-center justify-between";
+  }
 
   return (
-    <div className="w-full border border-black flex px-6 py-2 items-center justify-between">
-      <p className={classe}>
-        {task} {id}
-      </p>
+    <div className={classeDiv}>
+      <p className={classeTarefa}>{task}</p>
       <div className="flex gap-5">
         <button
-          className="border border-black shadow-[2px_2px_0_0_#000] w-10 h-10"
-          onClick={() => fnComplete(id)}
+          className="border bg-white border-black shadow-[2px_2px_0_0_#000] w-10 h-10"
+          onClick={() => fnComplete(id, isCompleted)}
         >
           V
         </button>
         <button
-          className="border border-black shadow-[2px_2px_0_0_#000] w-10 h-10"
+          className="border bg-white border-black shadow-[2px_2px_0_0_#000] w-10 h-10"
           onClick={() => fnEdit(id)}
         >
           E
