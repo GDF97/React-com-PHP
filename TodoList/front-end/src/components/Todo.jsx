@@ -1,5 +1,5 @@
 const Todo = ({ task, isCompleted, id, fnComplete, fnEdit, fnDelete }) => {
-  let classeTarefa = isCompleted ? "line-through" : "";
+  let classeTarefa = isCompleted ? "line-through text-white" : "";
   let classeDiv =
     "w-full border border-black flex px-6 py-2 items-center justify-between";
 
