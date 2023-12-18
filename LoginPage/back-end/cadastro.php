@@ -20,7 +20,7 @@
                 $query->bindParam(':email', $email);
                 $query->bindParam(':senha', $senha);
                 $query->execute();
-
+                
                 $status = 'ok';
                 echo json_encode(array("status" => $status));
             } catch (PDOException $e) {
