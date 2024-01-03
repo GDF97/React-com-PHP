@@ -6,7 +6,7 @@ const Login = ({ fn }) => {
   return (
     <div className="w-full h-full flex flex-col gap-8 pt-8">
       <div className="flex flex-col gap-2">
-        <p className="text-lg">Username:</p>
+        <p className="text-lg dark:text-slate-100">Username:</p>
         <input
           type="text"
           className="border border-black shadow-[4px_4px_1px_#000] outline-none p-1"
@@ -15,7 +15,7 @@ const Login = ({ fn }) => {
         />
       </div>
       <div className="flex flex-col gap-2">
-        <p className="text-lg">Password:</p>
+        <p className="text-lg dark:text-slate-100">Password:</p>
         <input
           type="text"
           className="border border-black shadow-[4px_4px_1px_#000] outline-none p-1"
@@ -24,7 +24,7 @@ const Login = ({ fn }) => {
         />
       </div>
       <button
-        className="w-full text-white bg-[#1E1E1E] flex items-center justify-center gap-2 p-1"
+        className="w-full text-white bg-[#1E1E1E] flex items-center justify-center gap-2 p-1 dark:bg-blue-800"
         onClick={() => fn(username, password)}
       >
         Login

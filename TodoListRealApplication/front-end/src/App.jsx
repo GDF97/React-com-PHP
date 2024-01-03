@@ -6,17 +6,19 @@ import Aplication from "./pages/App";
 
 const App = () => {
   const [userId, setUserId] = useState(null);
-  const getUserId = (id) => {
+  const [userName, setUserName] = useState(null);
+  const getUserInfos = (id, name) => {
     setUserId(id);
+    setUserName(name);
   };
   return (
     <>
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/Forms" element={<Forms getUserId={getUserId} />} />
+        <Route path="/Forms" element={<Forms getUserInfos={getUserInfos} />} />
         <Route
           path="/TodoListApp"
-          element={<Aplication id_usuario={userId} />}
+          element={<Aplication id_usuario={userId} nome_usuario={userName} />}
         />
       </Routes>
     </>

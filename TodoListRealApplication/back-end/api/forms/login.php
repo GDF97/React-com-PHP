@@ -20,7 +20,7 @@
 
                 
                 if($result){
-                    echo json_encode(array("message" => "ok", "user_id" => $result['id_usuario']));
+                    echo json_encode(array("message" => "ok", "user_id" => $result['id_usuario'], "user_name" => $result['nome']));
                 }
                 else{
                     echo json_encode(array("message" => "usuario não encontrado"));

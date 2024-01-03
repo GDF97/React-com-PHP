@@ -5,11 +5,11 @@ import TaskForm from "./components/TaskForm";
 import { API_URL } from "../../constants";
 import { Navigate } from "react-router-dom";
 
-const Aplication = ({ id_usuario }) => {
+const Aplication = ({ id_usuario, nome_usuario }) => {
   if (!id_usuario) return <Navigate to="/Forms" />;
   const emptyArr = [];
   const [listOfTasks, setListOfTasks] = useState([]);
-  const nameofuser = "Pedro Silva";
+  const nameofuser = nome_usuario;
   const userId = id_usuario;
 
   const fetchData = async () => {

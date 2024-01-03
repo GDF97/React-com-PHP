@@ -6,7 +6,9 @@ import ConfigIcon from "../../assets/icons/ConfigIcon.png";
 import { API_URL } from "../../constants";
 import "boxicons";
 
-const Forms = ({ getUserId }) => {
+const Forms = ({ getUserInfos }) => {
+  const docHTML = document.querySelector("html");
+
   const [loginForm, setLoginForm] = useState(true);
   const [open, setOpen] = useState(false);
   const [userid, setUserId] = useState(null);
@@ -19,10 +21,10 @@ const Forms = ({ getUserId }) => {
 
   if (loginForm) {
     classeLogin = "bg-white px-6 py-1";
-    classeRegister = "px-6 py-1 text-white bg-[#1e1e1e]";
+    classeRegister = "px-6 py-1 text-white bg-[#1e1e1e] dark:bg-blue-800";
   } else {
     classeRegister = "bg-white px-6 py-1";
-    classeLogin = "px-6 py-1 text-white bg-[#1e1e1e]";
+    classeLogin = "px-6 py-1 text-white bg-[#1e1e1e] dark:bg-blue-800";
   }
 
   const fnLogin = async (username, password) => {
@@ -40,7 +42,7 @@ const Forms = ({ getUserId }) => {
       const response = await fetch(url, configAPI);
       const data = await response.json();
       console.log(data.message);
-      getUserId(data.user_id);
+      getUserInfos(data.user_id, data.user_name);
       setUserId(data.user_id);
     } catch (error) {
       console.log(error);
@@ -79,17 +81,37 @@ const Forms = ({ getUserId }) => {
             </button>
           </div>
           <div className="relative">
-            <button className="border-none" onClick={() => setOpen(!open)}>
-              <img src={ConfigIcon} alt="teste" width={20} />
+            <button
+              className="border-none dark:hidden"
+              onClick={() => setOpen(!open)}
+            >
+              <box-icon name="cog"></box-icon>
+            </button>
+            <button
+              className="border-none dark:block hidden"
+              onClick={() => setOpen(!open)}
+            >
+              <box-icon name="cog" color="#ffffff"></box-icon>
             </button>
             {open ? (
-              <div className="absolute w-40 bg-white p-1 border border-black shadow-[2px_2px_1px_#000] bottom-10 right-0">
-                <button> Dark Mode </button>
+              <div className="absolute w-40 bg-white p-1 border border-black shadow-[2px_2px_1px_#000] bottom-10 right-0 dark:shadow-none dark:bg-zinc-950 dark:border-white">
+                <button
+                  className="dark:text-slate-100 dark:block hidden text-center w-full"
+                  onClick={() => docHTML.classList.remove("dark")}
+                >
+                  Light Mode
+                </button>
+                <button
+                  className="dark:hidden w-full"
+                  onClick={() => docHTML.classList.add("dark")}
+                >
+                  Dark Mode{" "}
+                </button>
               </div>
             ) : null}
           </div>
         </div>
-        <div className="w-full min-h-[360px] bg-white border border-black shadow-[4px_4px_1px_#000] flex flex-col p-4">
+        <div className="w-full min-h-[360px] bg-white border border-black shadow-[4px_4px_1px_#000] flex flex-col p-4 dark:bg-zinc-950 dark:border-white dark:shadow-none">
           {loginForm ? <Login fn={fnLogin} /> : <Register fn={fnRegister} />}
         </div>
       </div>
