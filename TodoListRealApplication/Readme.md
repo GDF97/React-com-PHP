@@ -5,7 +5,6 @@
 - Todo
 
   - [ ] Sofisticar a Autenticação (Utilizar JWT)
-  - [ ] Adicionar suporte para Dark Mode
   - [ ] Arrumar a estruturação do projeto
   - [ ] Melhorar a nomenclatura
   - Adicionar recursos visuais
@@ -20,6 +19,7 @@
 
   - Responsividade
   - Conexão com o banco de dados
+  - Suporte para Dark Mode
 
 ##
 
