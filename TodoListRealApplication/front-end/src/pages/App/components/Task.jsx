@@ -6,7 +6,7 @@ const Task = ({ task, id, isCompleted, edit, complete, deleteTask }) => {
 
   if (isCompleted) {
     taskClasse +=
-      "w-full flex items-center justify-between border border-black px-2 py-1 bg-green-500 dark:border-slate-100 dark:bg-green-500 flex-wrap";
+      "w-full flex items-center justify-between border border-black px-2 py-1 bg-green-500 dark:border-slate-100 dark:bg-green-600 flex-wrap";
   } else {
     taskClasse =
       "w-full flex items-center justify-between border border-black px-2 py-1 bg-white dark:bg-zinc-950 dark:border-slate-100 flex-wrap";
